@@ -8,6 +8,8 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+		Logger log = Logger.init(Application.class);
+		log.info("hello");
 	}
 
 }
