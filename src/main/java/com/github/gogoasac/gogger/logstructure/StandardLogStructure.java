@@ -6,6 +6,6 @@ public class StandardLogStructure implements LogStructure {
 
     @Override
     public String getStructure() {
-        return "[%s - %s] [%s]: ".formatted(Constant.TIMESTAMP, Constant.LOG_LEVEL, Constant.LOG_LEVEL);
+        return "[%s - %s] [%s]:".formatted(Constant.TIMESTAMP, Constant.LOG_LEVEL, Constant.CLASS_NAME);
     }
 }
