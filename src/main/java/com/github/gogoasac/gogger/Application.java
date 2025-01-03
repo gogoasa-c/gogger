@@ -18,6 +18,10 @@ public class Application {
 		return args -> {
 			Logger log = Logger.init(Application.class);
 			log.info("hello");
+			log.trace("hello");
+			log.warn("hello");
+			log.debug("hello");
+			log.error("big issue!!!");
 		};
 	}
 }

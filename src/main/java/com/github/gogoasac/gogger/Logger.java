@@ -4,6 +4,7 @@ import com.github.gogoasac.gogger.logstructure.LogStructure;
 import com.github.gogoasac.gogger.util.Constant;
 import com.github.gogoasac.gogger.util.ThrowingRunnable;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -33,15 +34,35 @@ public class Logger implements ApplicationContextAware {
         return new Logger(System.out, clazz, logStructure);
     }
 
-    public void info(String message) {
-       handleWrite(() -> outputStream.write(formatLogMessage(message).getBytes()));
+    public void trace(String message) {
+        this.log(message, LogLevel.TRACE);
     }
 
-    public String formatLogMessage(String message) {
-       return String.format("%s: %s", this.logStructure.getLogPattern(), message)
-               .replace(Constant.TIMESTAMP, LocalDateTime.now().toString())
-               .replace(Constant.CLASS_NAME, this.clazz.getName())
-               .replace(Constant.LOG_LEVEL, "INFO");
+    public void debug(String message) {
+        this.log(message, LogLevel.DEBUG);
+    }
+
+    public void info(String message) {
+        this.log(message, LogLevel.INFO);
+    }
+
+    public void warn(String message) {
+        this.log(message, LogLevel.WARN);
+    }
+
+    public void error(String message) {
+        this.log(message, LogLevel.ERROR);
+    }
+
+    private void log(String message, LogLevel logLevel) {
+        handleWrite(() -> outputStream.write(formatLogMessage(message, logLevel).getBytes()));
+    }
+
+    private String formatLogMessage(String message, LogLevel logLevel) {
+        return String.format("%s:\t %s%n", this.logStructure.getLogPattern(), message)
+                .replace(Constant.TIMESTAMP, LocalDateTime.now().toString())
+                .replace(Constant.CLASS_NAME, this.clazz.getName())
+                .replace(Constant.LOG_LEVEL, logLevel.getValue());
     }
 
     private void handleWrite(ThrowingRunnable action) {
