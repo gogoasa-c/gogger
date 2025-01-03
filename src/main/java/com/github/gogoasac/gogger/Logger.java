@@ -38,7 +38,7 @@ public class Logger implements ApplicationContextAware {
     }
 
     public String formatLogMessage(String message) {
-       return String.format("%s %s", this.logStructure.getLogPattern(), message)
+       return String.format("%s: %s", this.logStructure.getLogPattern(), message)
                .replace(Constant.TIMESTAMP, LocalDateTime.now().toString())
                .replace(Constant.CLASS_NAME, this.clazz.getName())
                .replace(Constant.LOG_LEVEL, "INFO");
