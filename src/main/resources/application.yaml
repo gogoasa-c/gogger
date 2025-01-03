@@ -1,3 +1,5 @@
 spring:
   application:
     name: gogger
+  logging:
+    log-pattern: "[{TIMESTAMP} - {LOG_LEVEL}] [{CLASS_NAME}]}"
