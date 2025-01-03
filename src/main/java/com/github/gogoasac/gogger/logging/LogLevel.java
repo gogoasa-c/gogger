@@ -1,4 +1,4 @@
-package com.github.gogoasac.gogger;
+package com.github.gogoasac.gogger.logging;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

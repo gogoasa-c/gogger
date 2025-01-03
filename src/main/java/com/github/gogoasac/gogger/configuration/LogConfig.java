@@ -1,14 +1,14 @@
 package com.github.gogoasac.gogger.configuration;
 
 import com.github.gogoasac.gogger.Logger;
-import com.github.gogoasac.gogger.logstructure.LogStructure;
+import com.github.gogoasac.gogger.logging.logstructure.LogStructure;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class LogConfig {
-    @Value("${spring.log-level:INFO}")
+    @Value("${spring.logging.log-level:INFO}")
     private String logLevel;
 
     @Bean

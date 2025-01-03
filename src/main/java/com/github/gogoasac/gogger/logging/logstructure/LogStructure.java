@@ -1,4 +1,4 @@
-package com.github.gogoasac.gogger.logstructure;
+package com.github.gogoasac.gogger.logging.logstructure;
 
 import lombok.Getter;
 import lombok.Setter;
