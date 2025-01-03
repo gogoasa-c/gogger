@@ -12,6 +12,11 @@ public class LogConfig {
     private String logLevel;
 
     @Bean
+    public String logLevel() {
+        return logLevel;
+    }
+
+    @Bean
     public Logger logger(LogStructure logStructure) {
         return new Logger(System.out, Logger.class, logStructure);
     }

@@ -19,10 +19,12 @@ public class Logger implements ApplicationContextAware {
     private final LogStructure logStructure;
 
     private static ApplicationContext context;
+    private static String logLevel;
 
     @Override
     public void setApplicationContext(@NotNull ApplicationContext applicationContext) {
         context = applicationContext;
+        logLevel = applicationContext.getBean("logLevel", String.class);
     }
 
     public static Logger init(Class<?> clazz) {
