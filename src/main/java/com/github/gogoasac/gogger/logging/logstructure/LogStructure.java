@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 public class LogStructure {
-    @Value("${spring.logging.log-pattern:[{TIMESTAMP} - {LOG_LEVEL}] [{CLASS_NAME}]}")
+    @Value("${logging.gogger.log-pattern:[{TIMESTAMP} - {LOG_LEVEL}] [{CLASS_NAME}]}")
     private String logPattern;
 }

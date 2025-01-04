@@ -1,6 +1,10 @@
 spring:
   application:
     name: gogger
-  logging:
+
+logging:
+  gogger:
     log-pattern: "[{TIMESTAMP} - {LOG_LEVEL}] [{CLASS_NAME}]"
     log-level: INFO
+    file-path: "out/logs/"
+    log-file-enabled: true
