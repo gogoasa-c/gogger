@@ -6,11 +6,14 @@ import com.github.gogoasac.gogger.logging.logstructure.LogStructure;
 import com.github.gogoasac.gogger.output.OutputBuffer;
 import com.github.gogoasac.gogger.util.Constant;
 import com.github.gogoasac.gogger.util.ThrowingRunnable;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 public class Logger implements ApplicationContextAware {
@@ -29,12 +32,15 @@ public class Logger implements ApplicationContextAware {
     }
 
     public static Logger init(Class<?> clazz) {
-        LogStructure logStructure = context.getBean(LogStructure.class);
-        return Logger.init(clazz, logStructure);
+        return Logger.init(clazz, context.getBean(LogStructure.class));
     }
 
-    public static Logger init(Class<?> clazz, LogStructure logStructure) {
-        return new Logger(clazz, logStructure);
+    public static Logger init(@NonNull Class<?> clazz, LogStructure logStructure) {
+        if (!LoggerRegistry.INSTANCE.loggers.containsKey(clazz.toString())) {
+            LoggerRegistry.INSTANCE.loggers.put(clazz.toString(), new Logger(clazz, logStructure));
+        }
+
+        return LoggerRegistry.INSTANCE.loggers.get(clazz.toString());
     }
 
     public void trace(String message) {
@@ -77,6 +83,15 @@ public class Logger implements ApplicationContextAware {
             action.run();
         } catch (Exception exception) {
             System.err.printf("Encountered exception: %s\n", exception.getMessage());
+        }
+    }
+
+    private static class LoggerRegistry {
+        static final LoggerRegistry INSTANCE = new LoggerRegistry();
+
+        final Map<String, Logger> loggers = new HashMap<>();
+
+        private LoggerRegistry() {
         }
     }
 }

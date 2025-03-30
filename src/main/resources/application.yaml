@@ -1,4 +1,9 @@
 spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
   application:
     name: gogger
 
@@ -8,3 +13,6 @@ logging:
     log-level: INFO
     file-path: "out/logs/"
     log-file-enabled: true
+    kafka:
+      enabled: "Yes"
+      topic-name: "log-topic"
